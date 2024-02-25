@@ -1,7 +1,7 @@
 # College Attendance Analyzer for TY Sem 6
 
-It provides total attendance from the start of lectures upto current date.
-It is done by using web scraping to scrape data from the [SVKM Portal website](https://portal.svkm.ac.in/usermgmt/login).
+This [attendance app](https://attendance-analyzer.netlify.app) provides total attendance from the start of lectures upto current date.
+It is done by using web scraping to scrape data from the [SVKM Portal](https://portal.svkm.ac.in/usermgmt/login) website.
 No database is used, the credentials entered are directly used to get the data, not saved anywhere.
 
 ### Attendance analyzer provides details in 3 colored zones:
