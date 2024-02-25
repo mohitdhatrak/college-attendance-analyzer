@@ -96,7 +96,8 @@ const needToAttendCount = (lecture) => {
 };
 
 function fetchData(username, password) {
-    fetch("http://127.0.0.1:5000/scrape", {
+    // fetch("http://127.0.0.1:5000/scrape", {
+    fetch("https://college-attendance-analyzer.onrender.com/scrape", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
