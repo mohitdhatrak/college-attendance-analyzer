@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 
-# URL for the attendance summary page
+# URL for scraping
 loginURL = 'https://portal.svkm.ac.in/usermgmt/login'
 attendanceURL = 'https://portal.svkm.ac.in/DJSCE/showStudentAttendanceSummaryByMonthAndYearNew'
 
@@ -14,26 +14,24 @@ def scrape_attendance_summary(username, password, months, year):
     # Selenium driver setup
     chrome_options = Options()
     chrome_options.add_argument('--headless')  # to run in headless mode, without opening a browser window
-    service = Service('./drivers/chromedriver.exe')  # Path to your Chrome driver executable
+    service = Service('./drivers/chromedriver.exe')
     driver = webdriver.Chrome(service=service, options=chrome_options)
     print("Driver", driver)
     
-    # Visit the login URL
+    # visit the login URL
     driver.get(loginURL)
 
-    # Locate the username and password fields and input your credentials
     username_field = driver.find_element(By.ID, 'userName')
     password_field = driver.find_element(By.ID, 'userPwd')
     username_field.send_keys(username)
     password_field.send_keys(password)
-
     # Submit the login form
     password_field.send_keys(Keys.RETURN)
 
     all_months_attendance_data = []
 
     for month in months:
-        # Visit the month-wise attendance summary page
+        # Visit the month-wise attendance summary pages
         driver.get(f'{attendanceURL}?acadMonth={month}&acadYear={year}')
 
         # Locate the dropdown select tag
@@ -54,5 +52,4 @@ def scrape_attendance_summary(username, password, months, year):
     # Close the driver
     driver.quit()
 
-    # return attendance data as html
     return '<table>' + ''.join(all_months_attendance_data) + '</table>'

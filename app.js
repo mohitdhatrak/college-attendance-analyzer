@@ -1,5 +1,6 @@
 const fetchBtn = document.getElementById("fetchDataBtn");
 const panelContainer = document.getElementById("panel-container");
+const loader = document.getElementById("loader");
 
 fetchBtn.addEventListener("click", function (event) {
     event.preventDefault();
@@ -18,6 +19,9 @@ fetchBtn.addEventListener("click", function (event) {
         panelContainer.appendChild(errorContainer);
     } else {
         fetchData(username, password);
+        isLoading = true;
+        loader.style.display = "block";
+        fetchBtn.disabled = true;
     }
 });
 
@@ -108,6 +112,9 @@ function fetchData(username, password) {
             return response.text();
         })
         .then((data) => {
+            loader.style.display = "none";
+            fetchBtn.disabled = false;
+
             let attendanceData = extractTableData(data);
 
             // sort as per percent
@@ -189,6 +196,9 @@ function fetchData(username, password) {
         .catch((error) => {
             console.log(error);
 
+            loader.style.display = "none";
+            fetchBtn.disabled = false;
+
             const errorContainer = document.createElement("div");
             errorContainer.innerText =
                 "Please check credentials, or try again later!";
@@ -197,7 +207,6 @@ function fetchData(username, password) {
         });
 }
 
-// Function to extract table data and organize it into an object of objects
 function extractTableData(htmlContent) {
     const parser = new DOMParser();
     const doc = parser.parseFromString(htmlContent, "text/html");
