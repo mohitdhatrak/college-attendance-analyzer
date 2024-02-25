@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Analysis</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Attendance Analysis</h1>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="SAP ID" required>
+            <input type="password" id="password" placeholder="Password" title="SVKM portal password" required>
+            <span class="password-help">(SVKM portal password)</span>
+            <p class="note">Note: Credentials won't be saved!</p>
+            <button id="fetchDataBtn">Check</button>
+        </form>
+        <div id="panel-container"></div>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
