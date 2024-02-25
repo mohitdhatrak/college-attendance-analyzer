@@ -15,7 +15,7 @@ fetchBtn.addEventListener("click", function (event) {
     if (username?.trim() == "" || password?.trim() == "") {
         const errorContainer = document.createElement("div");
         errorContainer.innerText = "Please fill required fields!";
-        errorContainer.classList.add("error-text");
+        errorContainer?.classList?.add("error-text");
         panelContainer.appendChild(errorContainer);
     } else {
         fetchData(username, password);
@@ -129,7 +129,7 @@ function fetchData(username, password) {
             console.log(attendanceData);
 
             const totalPercent = document.createElement("div");
-            totalPercent.classList.add("total-percent");
+            totalPercent?.classList?.add("total-percent");
 
             let sum = 0;
             for (const obj of Object.values(attendanceData)) {
@@ -142,22 +142,22 @@ function fetchData(username, password) {
 
             Object.values(attendanceData).forEach((lecture) => {
                 const panel = document.createElement("div");
-                panel.classList.add("panel");
+                panel?.classList?.add("panel");
 
                 const panelHeader = document.createElement("div");
-                panelHeader.classList.add("panel-header");
+                panelHeader?.classList?.add("panel-header");
                 panelHeader.innerHTML = `
                     <span>${lecture?.course} = ${lecture?.percent}%</span>
                     <span class="dropdown-arrow"></span>`;
                 panelHeader.addEventListener("click", () => {
-                    panelContent.classList.toggle("active");
+                    panelContent?.classList?.toggle("active");
                     panelHeader
                         .querySelector(".dropdown-arrow")
-                        .classList.toggle("active");
+                        ?.classList?.toggle("active");
                 });
 
                 const panelContent = document.createElement("div");
-                panelContent.classList.add("panel-content");
+                panelContent?.classList?.add("panel-content");
 
                 let htmlString = `
                         <p>Percentage: ${lecture.percent}</p>
@@ -167,12 +167,12 @@ function fetchData(username, password) {
                 if (lecture.percent >= 75) {
                     const count = canMissCount(lecture);
                     if (count == 0) {
-                        panelHeader.classList.add("yellow");
+                        panelHeader?.classList?.add("yellow");
                         htmlString += `
                             <p>To stay >= 75% attendance</p>
                             <p>CAN MISS: ${count} lectures</p>`;
                     } else {
-                        panelHeader.classList.add("green");
+                        panelHeader?.classList?.add("green");
                         htmlString += `
                             <p>To stay >= 75% attendance</p>
                             <p>CAN MISS: ${count} ${
@@ -181,7 +181,7 @@ function fetchData(username, password) {
                     }
                 } else {
                     const count = needToAttendCount(lecture);
-                    panelHeader.classList.add("red");
+                    panelHeader?.classList?.add("red");
                     htmlString += `
                             <p>To have >= 75% attendance</p>
                             <p>NEED TO ATTEND: ${count} lectures atleast</p>`;
@@ -203,7 +203,7 @@ function fetchData(username, password) {
             const errorContainer = document.createElement("div");
             errorContainer.innerText =
                 "Please check credentials, or try again later!";
-            errorContainer.classList.add("error-text");
+            errorContainer?.classList?.add("error-text");
             panelContainer.appendChild(errorContainer);
         });
 }
@@ -213,7 +213,7 @@ function extractTableData(htmlContent) {
     const doc = parser.parseFromString(htmlContent, "text/html");
 
     // Extract the content inside the <pre> tag
-    const preContent = doc.querySelector("pre").textContent;
+    const preContent = doc.querySelector("pre")?.textContent;
     const tableHtml = parser.parseFromString(preContent, "text/html");
     console.log(tableHtml);
 
@@ -233,8 +233,8 @@ function extractTableData(htmlContent) {
             );
             data[courseName].percent = Number(
                 (
-                    (data[courseName].attended * 100) /
-                    data[courseName].total
+                    (data[courseName]?.attended * 100) /
+                    data[courseName]?.total
                 ).toFixed(2)
             );
         } else {
