@@ -12,4 +12,5 @@ No database is used, the credentials entered are directly used to get the data, 
 
 ### Future Scope:
 
+-   Update logic to make the response time faster, currently too slow
 -   Option to select a date range to show the attendance data
