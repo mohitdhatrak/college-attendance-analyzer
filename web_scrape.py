@@ -6,7 +6,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import Select, WebDriverWait
 
 # URL for scraping
 loginURL = 'https://portal.svkm.ac.in/usermgmt/login'
@@ -25,8 +26,8 @@ def scrape_attendance_summary(username, password, months, year):
 
     service = Service(driver_path)
     browser = webdriver.Chrome(service=service, options=chrome_options)
-    print("Driver", browser)
-    
+    wait = WebDriverWait(browser, 10)  # Maximum wait time of 10 seconds
+
     # visit the login URL
     browser.get(loginURL)
 
@@ -37,11 +38,16 @@ def scrape_attendance_summary(username, password, months, year):
     # Submit the login form
     password_field.send_keys(Keys.RETURN)
 
+    # wait till login occurs
+    wait.until(EC.presence_of_element_located((By.ID, 'dashboardPage')))
+
     all_months_attendance_data = []
 
     for month in months:
         # Visit the month-wise attendance summary pages
         browser.get(f'{attendanceURL}?acadMonth={month}&acadYear={year}')
+        # wait till page loads
+        wait.until(EC.presence_of_element_located((By.ID, 'showStudentAttendancesSummary')))
 
         # Locate the dropdown select tag
         select_element = browser.find_element(By.NAME, 'showStudentAttendancesSummary_length')
