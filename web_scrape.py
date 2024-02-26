@@ -17,15 +17,17 @@ def scrape_attendance_summary(username, password, months, year):
     # Selenium driver setup
     chrome_options = Options()
     chrome_options.add_argument('--headless')  # to run in headless mode, without opening a browser window
+    chrome_options.add_argument("--disable-gpu")
+    browser = webdriver.Chrome(options=chrome_options)
 
     # driver_path -> './drivers/chromedriver-windows.exe'
-    driver_path = '/home/mohitdhatrak/college-attendance-analyzer/drivers/chromedriver-linux'
+    # driver_path = '/home/mohitdhatrak/college-attendance-analyzer/drivers/chromedriver-linux'
 
     # Set the permissions to allow execution for all users
-    os.chmod(driver_path, 0o111)
+    # os.chmod(driver_path, 0o111)
 
-    service = Service(driver_path)
-    browser = webdriver.Chrome(service=service, options=chrome_options)
+    # service = Service(driver_path)
+    # browser = webdriver.Chrome(service=service, options=chrome_options)
     wait = WebDriverWait(browser, 10)  # Maximum wait time of 10 seconds
 
     # visit the login URL
