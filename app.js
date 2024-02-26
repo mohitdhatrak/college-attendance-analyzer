@@ -99,10 +99,9 @@ function fetchData(username, password) {
     // fetch("http://127.0.0.1:5000/scrape", {
     fetch("https://mohitdhatrak.pythonanywhere.com/scrape", {
         method: "POST",
-        // Don't add headers, this might cause CORS error
-        // headers: {
-        //     "Content-Type": "application/json",
-        // },
+        headers: {
+            "Content-Type": "application/json",
+        },
         body: JSON.stringify({
             username,
             password,
