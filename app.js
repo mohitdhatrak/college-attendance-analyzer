@@ -108,6 +108,7 @@ function fetchData(username, password) {
             months: defaultMonths,
             year: 2024,
         }),
+        mode: "cors",
     })
         .then((response) => {
             return response.text();

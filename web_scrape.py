@@ -24,14 +24,14 @@ def scrape_attendance_summary(username, password, months, year):
     os.chmod(driver_path, 0o111)
 
     service = Service(driver_path)
-    driver = webdriver.Chrome(service=service, options=chrome_options)
-    print("Driver", driver)
+    browser = webdriver.Chrome(service=service, options=chrome_options)
+    print("Driver", browser)
     
     # visit the login URL
-    driver.get(loginURL)
+    browser.get(loginURL)
 
-    username_field = driver.find_element(By.ID, 'userName')
-    password_field = driver.find_element(By.ID, 'userPwd')
+    username_field = browser.find_element(By.ID, 'userName')
+    password_field = browser.find_element(By.ID, 'userPwd')
     username_field.send_keys(username)
     password_field.send_keys(password)
     # Submit the login form
@@ -41,16 +41,16 @@ def scrape_attendance_summary(username, password, months, year):
 
     for month in months:
         # Visit the month-wise attendance summary pages
-        driver.get(f'{attendanceURL}?acadMonth={month}&acadYear={year}')
+        browser.get(f'{attendanceURL}?acadMonth={month}&acadYear={year}')
 
         # Locate the dropdown select tag
-        select_element = driver.find_element(By.NAME, 'showStudentAttendancesSummary_length')
+        select_element = browser.find_element(By.NAME, 'showStudentAttendancesSummary_length')
         select = Select(select_element)
         # Select the desired option by value -> -1 is for ALL
         select.select_by_value("-1")
 
         # Extract the page source
-        page_source = driver.page_source
+        page_source = browser.page_source
 
         # Parse the attendance summary data from the page source using BeautifulSoup
         soup = BeautifulSoup(page_source, 'html.parser')
@@ -58,7 +58,7 @@ def scrape_attendance_summary(username, password, months, year):
         tbody = attendance_summary_table.find('tbody')
         all_months_attendance_data.append(str(tbody))
 
-    # Close the driver
-    driver.quit()
+    # Close the browser
+    browser.quit()
 
     return '<table>' + ''.join(all_months_attendance_data) + '</table>'
