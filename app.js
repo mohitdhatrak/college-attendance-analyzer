@@ -99,9 +99,10 @@ function fetchData(username, password) {
     // fetch("http://127.0.0.1:5000/scrape", {
     fetch("https://mohitdhatrak.pythonanywhere.com/scrape", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
+        // Don't add headers, this might cause CORS error
+        // headers: {
+        //     "Content-Type": "application/json",
+        // },
         body: JSON.stringify({
             username,
             password,
@@ -220,7 +221,6 @@ function extractTableData(htmlContent) {
 
     const data = {};
     const rows = tableHtml.querySelectorAll("table tbody tr");
-    console.log(rows);
 
     rows.forEach((row) => {
         const cells = row.querySelectorAll("td");
