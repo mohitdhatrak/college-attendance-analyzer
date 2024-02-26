@@ -19,7 +19,7 @@ def scrape_attendance_summary(username, password, months, year):
     chrome_options.add_argument('--headless')  # to run in headless mode, without opening a browser window
 
     # driver_path -> './drivers/chromedriver-windows.exe'
-    driver_path = './drivers/chromedriver-linux'
+    driver_path = '/home/mohitdhatrak/college-attendance-analyzer/drivers/chromedriver-linux'
 
     # Set the permissions to allow execution for all users
     os.chmod(driver_path, 0o111)
