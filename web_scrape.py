@@ -1,3 +1,5 @@
+import os
+
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -14,7 +16,13 @@ def scrape_attendance_summary(username, password, months, year):
     # Selenium driver setup
     chrome_options = Options()
     chrome_options.add_argument('--headless')  # to run in headless mode, without opening a browser window
-    service = Service('./drivers/chromedriver.exe')
+
+    driver_path = './drivers/chromedriver.exe'
+
+    # Set the permissions to allow execution for all users
+    os.chmod(driver_path, 0o111)
+
+    service = Service(driver_path)
     driver = webdriver.Chrome(service=service, options=chrome_options)
     print("Driver", driver)
     
