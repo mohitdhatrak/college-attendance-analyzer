@@ -8,7 +8,7 @@ app = Flask(__name__)
 # CORS(app, origins=['https://attendance-analyzer.netlify.app', 'http://localhost:5500'])
 
 @app.route('/scrape', methods=['POST'])
-@cross_origin(origins=['https://attendance-analyzer.netlify.app'])
+@cross_origin(origins='*')
 def scrape_data():
     req_body = request.json
     username = req_body.get('username')
