@@ -1,7 +1,7 @@
 from flask import Flask, render_template_string, request
 from flask_cors import CORS
 
-from web_scrape import scrape_attendance_summary
+from web_scrape import scrape_attendance_summary44
 
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
