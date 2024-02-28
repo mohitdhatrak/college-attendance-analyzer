@@ -1,5 +1,3 @@
-import os
-
 from flask import Flask, render_template_string, request
 from flask_cors import CORS
 
@@ -7,7 +5,7 @@ from web_scrape import scrape_attendance_summary
 
 app = Flask(__name__)
 # CORS(app, origins='*')
-CORS(app, origins=[os.getenv('CLIENT_URL')])
+CORS(app, origins=['https://attendance-analyzer.netlify.app'])
 
 @app.route('/scrape', methods=['POST'])
 def scrape_data():
