@@ -19,7 +19,6 @@ fetchBtn.addEventListener("click", function (event) {
         panelContainer.appendChild(errorContainer);
     } else {
         fetchData(username, password);
-        isLoading = true;
         loader.style.display = "block";
         fetchBtn.disabled = true;
     }
@@ -97,7 +96,7 @@ const needToAttendCount = (lecture) => {
 
 function fetchData(username, password) {
     // fetch("http://127.0.0.1:5000/scrape", {
-    fetch("https://mohitdhatrak.pythonanywhere.com/scrape", {
+    fetch("https://attendance-analyzer-docker.onrender.com/scrape", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
