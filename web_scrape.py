@@ -1,5 +1,3 @@
-import os
-
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -8,6 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select, WebDriverWait
+from webdriver_manager.chrome import ChromeDriverManager
 
 # URL for scraping
 loginURL = 'https://portal.svkm.ac.in/usermgmt/login'
@@ -16,18 +15,14 @@ attendanceURL = 'https://portal.svkm.ac.in/DJSCE/showStudentAttendanceSummaryByM
 def scrape_attendance_summary(username, password, months, year):
     # Selenium driver setup
     chrome_options = Options()
+    chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument('--headless')  # to run in headless mode, without opening a browser window
-    chrome_options.add_argument("--disable-gpu")
-    browser = webdriver.Chrome(options=chrome_options)
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--disable-gpu") 
+                                
+    # Automatically download and use the appropriate ChromeDriver
+    browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 
-    # driver_path -> './drivers/chromedriver-windows.exe'
-    # driver_path = '/home/mohitdhatrak/college-attendance-analyzer/drivers/chromedriver-linux'
-
-    # Set the permissions to allow execution for all users
-    # os.chmod(driver_path, 0o111)
-
-    # service = Service(driver_path)
-    # browser = webdriver.Chrome(service=service, options=chrome_options)
     wait = WebDriverWait(browser, 10)  # Maximum wait time of 10 seconds
 
     # visit the login URL
@@ -51,13 +46,12 @@ def scrape_attendance_summary(username, password, months, year):
         # wait till page loads
         wait.until(EC.presence_of_element_located((By.ID, 'showStudentAttendancesSummary')))
 
-        # Locate the dropdown select tag
+        # to get all entries from pagination
         select_element = browser.find_element(By.NAME, 'showStudentAttendancesSummary_length')
         select = Select(select_element)
-        # Select the desired option by value -> -1 is for ALL
+        # Select option by value -> -1 is for ALL
         select.select_by_value("-1")
 
-        # Extract the page source
         page_source = browser.page_source
 
         # Parse the attendance summary data from the page source using BeautifulSoup
