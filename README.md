@@ -10,6 +10,16 @@ No database is used, the credentials entered are directly used to get the data, 
 -   Green zone: attendance >= 75% -- shows no. of lectures that can be missed still having attendance >= 75%
 -   Yellow zone: attendance >= 75% -- this means, it is not possible to miss even 1 lecture to maintain attendance >-= 75%
 
+### Screenshots of the app:
+
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/03a3e136-c307-4ac9-ad8a-c337c3e43721)
+
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/c87ea310-89f1-4448-960e-99be953c0ae2)
+
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/941990a1-42e2-4c22-8936-0626ae1182da)
+
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/c111e445-00f0-41dc-9707-0bf7ba30b7d5)
+
 ### Future Scope:
 
 -   Update logic to make the response time faster, currently too slow
