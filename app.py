@@ -18,5 +18,5 @@ def scrape_data():
     html_content = scrape_attendance_summary(username, password, months, year)
     return render_template_string('<pre>{{ html_content }}</pre>', html_content=html_content)
 
-# if __name__ == '__main__':
-#     app.run(debug=True, port=5000)
+if __name__ == '__main__':
+    app.run(debug=True, port=8080)

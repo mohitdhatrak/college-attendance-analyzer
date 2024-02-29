@@ -12,4 +12,5 @@ RUN apt-get update && apt-get install --fix-missing -y wget unzip && \
     rm google-chrome-stable_current_amd64.deb && \
     apt-get clean
 
-CMD ["python", "app.py"]
+# Use gunicorn to run the Flask app
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "app:app"]
