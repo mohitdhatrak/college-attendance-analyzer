@@ -95,7 +95,7 @@ const needToAttendCount = (lecture) => {
 };
 
 function fetchData(username, password) {
-    // fetch("http://127.0.0.1:5000/scrape", {
+    // fetch("http://127.0.0.1:8080/scrape", {
     fetch("https://attendance-analyzer-docker.onrender.com/scrape", {
         method: "POST",
         headers: {

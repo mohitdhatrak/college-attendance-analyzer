@@ -3,6 +3,7 @@
 * {
     box-sizing: border-box;
     font-family: "Montserrat", sans-serif;
+    line-height: 1.5;
 }
 
 body {
@@ -60,6 +61,8 @@ button:hover {
 .note {
     margin: 15px auto;
     font-size: 1.1rem;
+    width: 20rem;
+    max-width: 90vw;
 }
 
 /* Accordion styles */
