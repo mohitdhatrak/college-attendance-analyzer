@@ -221,7 +221,12 @@ function extractTableData(htmlContent) {
     const data = {};
     const rows = tableHtml.querySelectorAll("table tbody tr");
 
-    rows.forEach((row) => {
+    // special case - when current month has no data, table is empty, so remove those values
+    const validRows = Array.from(rows).filter(
+        (row) => !row?.children?.[0]?.className?.includes("dataTables_empty")
+    );
+
+    validRows.forEach((row) => {
         const cells = row.querySelectorAll("td");
         const courseName = cells[1]?.textContent?.trim();
         let obj = {};
