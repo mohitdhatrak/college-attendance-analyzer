@@ -13,4 +13,4 @@ RUN apt-get update && apt-get install --fix-missing -y wget unzip && \
     apt-get clean
 
 # Use gunicorn to run the Flask app
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "app:app"]
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8080", "--timeout", "120", "app:app"]
