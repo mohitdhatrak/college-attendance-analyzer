@@ -15,13 +15,13 @@
             <input type="text" id="username" placeholder="SAP ID" required>
             <input type="password" id="password" placeholder="Password" title="SVKM portal password" required>
             <span class="password-help">(SVKM portal or NMIMS app password)</span>
-            <p class="note">Note: Credentials won't be saved! Average response time is 30 secs :( Verify attendance from
-                NMIMS app, this data from portal might not be accurate</p>
+            <p class="note">Note: Credentials won't be saved. Average response time is 30 secs :( Verify attendance from
+                NMIMS app, this data from portal might not be accurate!</p>
             <button id="fetchDataBtn">Check</button>
         </form>
         <div id="panel-container"></div>
+        <div id="loader" class="loader"></div>
     </div>
-    <div id="loader" class="loader"></div>
 
     <!-- To use import statement in js file, it needs to be a module -->
     <script src="app.js" type="module"></script>
