@@ -4,3 +4,4 @@ Flask-Cors==4.0.0
 gunicorn==21.2.0
 selenium==4.18.1
 webdriver-manager==4.0.1
+python-dotenv==1.0.1

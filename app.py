@@ -1,11 +1,19 @@
+import os
+
+from dotenv import load_dotenv
 from flask import Flask, render_template_string, request
 from flask_cors import CORS
 
 from web_scrape import scrape_attendance_summary
 
+load_dotenv()
+
 app = Flask(__name__)
-# CORS(app, origins='*')
-CORS(app, origins=['https://attendance-analyzer.netlify.app'])
+
+if(os.getenv('ENVIRONMENT') == 'DEV'):
+    CORS(app, origins='*')
+else:
+    CORS(app, origins=f"{os.getenv('CLIENT_URL')}")
 
 @app.route('/scrape', methods=['POST'])
 def scrape_data():
@@ -19,4 +27,4 @@ def scrape_data():
     return render_template_string('<pre>{{ html_content }}</pre>', html_content=html_content)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8080)
+    app.run(debug=os.getenv('DEBUG', False), port=os.getenv('PORT', 8080))

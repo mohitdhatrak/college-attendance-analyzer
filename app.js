@@ -1,3 +1,5 @@
+import { SERVER_URL } from "./env.js";
+
 const fetchBtn = document.getElementById("fetchDataBtn");
 const panelContainer = document.getElementById("panel-container");
 const loader = document.getElementById("loader");
@@ -95,8 +97,7 @@ const needToAttendCount = (lecture) => {
 };
 
 function fetchData(username, password) {
-    // fetch("http://127.0.0.1:8080/scrape", {
-    fetch("https://attendance-analyzer-docker.onrender.com/scrape", {
+    fetch(`${SERVER_URL}/scrape`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

@@ -1,4 +1,7 @@
+import os
+
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
@@ -8,9 +11,11 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select, WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
+load_dotenv()
+
 # URL for scraping
-loginURL = 'https://portal.svkm.ac.in/usermgmt/login'
-attendanceURL = 'https://portal.svkm.ac.in/DJSCE/showStudentAttendanceSummaryByMonthAndYearNew'
+loginURL = os.getenv('LOGIN_URL')
+attendanceURL = os.getenv('ATTENDANCE_URL')
 
 def scrape_attendance_summary(username, password, months, year):
     # Selenium driver setup
