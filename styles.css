@@ -134,7 +134,7 @@ button:hover {
 .dropdown-arrow {
     width: 15px;
     height: 10px;
-    background-image: url("down-arrow.png");
+    background-image: url("./assets/down-arrow.png");
     background-size: contain;
     background-repeat: no-repeat;
 }
