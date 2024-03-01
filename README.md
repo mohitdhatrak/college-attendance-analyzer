@@ -1,5 +1,7 @@
 # College Attendance Analyzer for TY Sem 6
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/08415c9a-2457-4240-8008-ab7eac2952bc/deploy-status)](https://app.netlify.com/sites/attendance-analyzer/deploys)
+
 This [attendance app](https://attendance-analyzer.netlify.app) provides total attendance from the start of lectures upto current date.
 It is done by using web scraping to scrape data from the [SVKM Portal](https://portal.svkm.ac.in/usermgmt/login) website.
 No database is used, the credentials entered are directly used to get the data, not saved anywhere.
