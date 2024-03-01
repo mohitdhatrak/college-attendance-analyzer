@@ -41,12 +41,27 @@ const months = [
     "Dec",
 ];
 
+let startMonthIndex = 0;
+let year = 2024;
+
+const semesterStart = () => {
+    fetch(`${SERVER_URL}/semester`)
+        .then((response) => response.json())
+        .then((data) => {
+            startMonthIndex = Number(data?.month) - 1;
+            year = Number(data?.year);
+        })
+        .catch((error) => console.log(error));
+};
+semesterStart();
+
 const currentDate = new Date();
 const currentMonthIndex = currentDate.getMonth();
 
-// for Sem 6, college starts from month of Jan, so i = 0
+// possible bug - currently this handles only same year data
+// won't be an issue for now as our semesters start and end in same year
 const defaultMonths = [];
-for (let i = 0; i <= currentMonthIndex; i++) {
+for (let i = startMonthIndex; i <= currentMonthIndex; i++) {
     defaultMonths.push(months[i]);
 }
 
@@ -56,7 +71,11 @@ const canMissCount = (lecture) => {
     let present = lecture?.attended;
 
     // LAB has '2' value for each lab session
-    if (lecture?.course?.includes("LAB")) {
+    if (
+        (lecture?.course?.includes("LAB") &&
+            !lecture?.course?.includes("UBIQUITOUS")) || // added exception for UBI lab, it shows count 1
+        lecture?.course?.includes("INNOVATIVE PRODUCT DEVELPOMENT") // added exception for IPD, it shows count 2?
+    ) {
         total += 2;
         while ((present * 100) / total >= 75) {
             count++;
@@ -79,7 +98,11 @@ const needToAttendCount = (lecture) => {
     let present = lecture?.attended;
 
     // LAB has '2' value for each lab session
-    if (lecture?.course?.includes("LAB")) {
+    if (
+        (lecture?.course?.includes("LAB") &&
+            !lecture?.course?.includes("UBIQUITOUS")) || // added exception for UBI lab, it shows count 1
+        lecture?.course?.includes("INNOVATIVE PRODUCT DEVELPOMENT") // added exception for IPD, it shows count 2?
+    ) {
         while ((present * 100) / total < 75) {
             count++;
             present += 2;
@@ -106,42 +129,70 @@ function fetchData(username, password) {
             username,
             password,
             months: defaultMonths,
-            year: 2024,
+            year,
         }),
         mode: "cors",
     })
-        .then((response) => {
-            return response.text();
-        })
+        .then((response) => response.text())
         .then((data) => {
             loader.style.display = "none";
             fetchBtn.disabled = false;
 
             let attendanceData = extractTableData(data);
+            attendanceData = Object.values(attendanceData);
 
-            // sort as per percent
-            const dataArr = Object.values(attendanceData);
-            dataArr.sort((a, b) => a.percent - b.percent);
-            const sortedData = {};
-            dataArr.forEach((item) => {
-                sortedData[item.course] = item;
+            // sort as per color zone and percent
+            const colourObj = {
+                red: [],
+                yellow: [],
+                green: [],
+            };
+
+            // first make separate arrays as per colours
+            attendanceData.forEach((lecture) => {
+                if (lecture.percent < 75) {
+                    const count = needToAttendCount(lecture);
+                    lecture.count = count;
+                    colourObj.red.push(lecture);
+                } else {
+                    const count = canMissCount(lecture);
+                    lecture.count = count;
+                    if (count == 0) {
+                        colourObj.yellow.push(lecture);
+                    } else {
+                        colourObj.green.push(lecture);
+                    }
+                }
             });
-            attendanceData = sortedData;
+
+            // sort each array as per the colour
+            Object.values(colourObj).forEach((arr) => {
+                arr.sort((a, b) => a.percent - b.percent);
+            });
+
+            // combine each sorted array in order of colours
+            const sortedDataArr = [
+                ...colourObj.red,
+                ...colourObj.yellow,
+                ...colourObj.green,
+            ];
+
+            attendanceData = sortedDataArr;
             console.log(attendanceData);
 
             const totalPercent = document.createElement("div");
             totalPercent?.classList?.add("total-percent");
 
             let sum = 0;
-            for (const obj of Object.values(attendanceData)) {
-                sum += obj?.percent;
+            for (const lecture of attendanceData) {
+                sum += lecture?.percent;
             }
             totalPercent.innerText = `Total percentage = ${(
-                sum / Object.values(attendanceData)?.length
+                sum / attendanceData?.length
             ).toFixed(2)}%`;
             panelContainer.appendChild(totalPercent);
 
-            Object.values(attendanceData).forEach((lecture) => {
+            attendanceData.forEach((lecture) => {
                 const panel = document.createElement("div");
                 panel?.classList?.add("panel");
 
@@ -165,27 +216,44 @@ function fetchData(username, password) {
                         <p>Total Lectures: ${lecture.total}</p>
                         <p>Present: ${lecture.attended}</p>
                         <p>Absent: ${lecture.total - lecture.attended}</p>`;
+                const count = lecture?.count;
                 if (lecture.percent >= 75) {
-                    const count = canMissCount(lecture);
                     if (count == 0) {
                         panelHeader?.classList?.add("yellow");
                         htmlString += `
                             <p>To stay >= 75% attendance</p>
-                            <p>CAN MISS: ${count} lectures</p>`;
+                            <p>CAN MISS: ${count} ${
+                            lecture?.course?.includes("LAB")
+                                ? "labs"
+                                : "lectures"
+                        }</p>`;
                     } else {
                         panelHeader?.classList?.add("green");
                         htmlString += `
                             <p>To stay >= 75% attendance</p>
                             <p>CAN MISS: ${count} ${
-                            count == 1 ? "lecture" : "lectures"
+                            lecture?.course?.includes("LAB")
+                                ? count == 1
+                                    ? "lab"
+                                    : "labs"
+                                : count == 1
+                                ? "lecture"
+                                : "lectures"
                         } safely</p>`;
                     }
                 } else {
-                    const count = needToAttendCount(lecture);
                     panelHeader?.classList?.add("red");
                     htmlString += `
                             <p>To have >= 75% attendance</p>
-                            <p>NEED TO ATTEND: ${count} lectures atleast</p>`;
+                            <p>NEED TO ATTEND: ${count} ${
+                        lecture?.course?.includes("LAB")
+                            ? count == 1
+                                ? "lab"
+                                : "labs"
+                            : count == 1
+                            ? "lecture"
+                            : "lectures"
+                    } atleast</p>`;
                 }
 
                 panelContent.innerHTML = htmlString;

@@ -15,6 +15,10 @@ if(os.getenv('ENVIRONMENT') == 'DEV'):
 else:
     CORS(app, origins=f"{os.getenv('CLIENT_URL')}")
 
+@app.route('/semester', methods=['GET'])
+def semester_start():
+    return {"month": os.getenv('START_MONTH_NUMBER'), "year": os.getenv('START_YEAR')}
+
 @app.route('/scrape', methods=['POST'])
 def scrape_data():
     req_body = request.json
