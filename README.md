@@ -14,11 +14,11 @@ No database is used, the credentials entered are directly used to get the data, 
 
 ### Screenshots of the app (mobile responsive):
 
-![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/16a3a96d-34d9-45a0-adfa-018ea3e0d94f)
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/d3a66dce-9f83-425f-b827-416ec50fc4e9)
 
-![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/a3828bf7-8130-43c2-8eb2-5dc71390c416)
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/b1145188-a8c7-4549-83bb-b7d8188e8c83)
 
-![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/da17e266-9412-41c9-b187-435af5b53927)
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/aa509771-d459-4a19-9838-ddab8f3e14f7)
 
 ![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/bd9a9a59-aaa5-4dd1-8d95-1a0a903bc8b4)
 
