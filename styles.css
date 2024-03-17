@@ -169,3 +169,14 @@ button:hover {
         transform: rotate(360deg);
     }
 }
+
+.footer {
+    text-align: center;
+    padding: 10px;
+    color: #888;
+    font-size: 14px;
+}
+
+.footer p {
+    margin: 5px auto;
+}
