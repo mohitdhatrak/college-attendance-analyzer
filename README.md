@@ -18,6 +18,8 @@ No database is used, the credentials entered are directly used to get the data, 
 
 ![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/b1145188-a8c7-4549-83bb-b7d8188e8c83)
 
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/d61a40ae-f152-43f1-9411-a4d2354e45b0)
+
 ![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/aa509771-d459-4a19-9838-ddab8f3e14f7)
 
 ![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/bd9a9a59-aaa5-4dd1-8d95-1a0a903bc8b4)
