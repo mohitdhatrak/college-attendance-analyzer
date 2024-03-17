@@ -112,7 +112,7 @@ button:hover {
     text-transform: uppercase;
     border-radius: 5px;
     margin-bottom: 18px;
-    text-align: center;
+    /* text-align: center; */
 }
 
 .active {

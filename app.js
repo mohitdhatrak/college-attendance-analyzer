@@ -183,13 +183,19 @@ function fetchData(username, password) {
             const totalPercent = document.createElement("div");
             totalPercent?.classList?.add("total-percent");
 
-            let sum = 0;
+            let totalSum = 0;
+            let presentSum = 0;
             for (const lecture of attendanceData) {
-                sum += lecture?.percent;
+                totalSum += lecture?.total;
+                presentSum += lecture?.attended;
             }
             totalPercent.innerText = `Total percentage = ${(
-                sum / attendanceData?.length
-            ).toFixed(2)}%`;
+                (presentSum * 100) /
+                totalSum
+            ).toFixed(2)}%
+            Total lectures = ${totalSum}
+            Present = ${presentSum}
+            Absent = ${totalSum - presentSum}`;
             panelContainer.appendChild(totalPercent);
 
             attendanceData.forEach((lecture) => {
