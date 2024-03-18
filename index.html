@@ -11,20 +11,30 @@
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png">
-    <link rel="manifest" href="./assets/site.webmanifest">
+    <link rel="manifest" href="./site.webmanifest">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+    <div id="install-banner" class="install-banner">
+        <div class="banner-content">
+            <button id="close-banner-btn" class="close-banner-btn">
+                <img class="close-icon" alt="Close" src="assets/close-white.svg" />
+            </button>
+            <p class="banner-text">Attendance App</p>
+        </div>
+        <button id="install-pwa-btn" class="install-button">Install</button>
+    </div>
+
     <div class="container">
         <h1>Attendance Analyzer</h1>
-        <form id="loginForm">
+        <form id="login-form">
             <input type="text" id="username" placeholder="SAP ID" required>
             <input type="password" id="password" placeholder="Password" title="SVKM portal password" required>
             <span class="password-help">(SVKM portal or NMIMS app password)</span>
-            <p class="note">Note: Credentials aren't saved. Average response time is 30 secs :( Verify attendance from
-                NMIMS app, this data from portal might not be accurate!</p>
-            <button id="fetchDataBtn">Check</button>
+            <p class="note">Note: Credentials aren't saved. Average response time is 30 secs :( This data is from the
+                SVKM portal, might not be accurate!</p>
+            <button id="fetch-data-btn">Check</button>
         </form>
         <div id="panel-container"></div>
         <div id="loader" class="loader"></div>

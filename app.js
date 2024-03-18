@@ -1,6 +1,53 @@
+let deferredPrompt;
+let isInstallPromptShown = false;
+
+window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault();
+
+    // Save the event to use it later
+    deferredPrompt = event;
+    if (!isInstallPromptShown) {
+        customInstallPrompt();
+        isInstallPromptShown = true;
+    }
+});
+
+function customInstallPrompt() {
+    const pwaBanner = document.getElementById("install-banner");
+    const closeBannerBtn = document.getElementById("close-banner-btn");
+    const installPwaBtn = document.getElementById("install-pwa-btn");
+
+    closeBannerBtn.addEventListener("click", () => {
+        pwaBanner.style.display = "none";
+        deferredPrompt = null;
+    });
+
+    installPwaBtn.addEventListener("click", () => {
+        // Show the browser's default install prompt
+        deferredPrompt.prompt();
+
+        deferredPrompt.userChoice.then((choiceResult) => {
+            console.log(`User ${choiceResult.outcome} the install prompt`);
+            if (choiceResult.outcome === "accepted") {
+                deferredPrompt = null;
+            }
+        });
+    });
+}
+
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker.register("/service-worker.js").then(
+            (res) =>
+                console.log("Service Worker registered with scope:", res.scope),
+            (err) => console.log("Service Worker registration failed:", err)
+        );
+    });
+}
+
 import { SERVER_URL } from "./env.js";
 
-const fetchBtn = document.getElementById("fetchDataBtn");
+const fetchBtn = document.getElementById("fetch-data-btn");
 const panelContainer = document.getElementById("panel-container");
 const loader = document.getElementById("loader");
 
