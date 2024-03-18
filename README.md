@@ -4,13 +4,19 @@
 
 This [attendance app](https://attendance-analyzer.netlify.app) provides total attendance from the start of the semester upto the current date.
 It is done by using web scraping to scrape data from the [SVKM Portal](https://portal.svkm.ac.in/usermgmt/login) website.
-No database is used, the credentials entered are directly used to get the data, not saved anywhere.
 
-### Attendance analyzer provides details in 3 colored zones:
+### Attendance analyzer provides details in 3 colored zones (sorted in ascending order as per attendance):
 
 -   Red zone: attendance < 75% -- shows no. of lectures to attend to have attendance >= 75%
 -   Green zone: attendance >= 75% -- shows no. of lectures that can be missed still having attendance >= 75%
 -   Yellow zone: attendance >= 75% -- this means, it is not possible to miss even 1 lecture to maintain attendance >-= 75%
+
+### A few points to note:
+
+- No database is used, the credentials entered are directly used to get the data, not saved anywhere.
+- Since the wait time to get current data is long, last viewed data is stored in local-storage, it can be analyzed till then.
+- The SVKM portal doesn't get updated immediately, so present day's attendance might reflect after a few days.
+- There are some discrepancies in the data on the NMIMS app vs SVKM portal, verify your attendance to be sure!
 
 ### Screenshots of the PWA:
 
