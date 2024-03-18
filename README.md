@@ -1,8 +1,8 @@
-# College Attendance Analyzer for TY Sem 6
+# College Attendance Analyzer PWA for TY Sem 6
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/08415c9a-2457-4240-8008-ab7eac2952bc/deploy-status)](https://app.netlify.com/sites/attendance-analyzer/deploys)
 
-This [attendance app](https://attendance-analyzer.netlify.app) provides total attendance from  the start of the semester upto the current date.
+This [attendance app](https://attendance-analyzer.netlify.app) provides total attendance from the start of the semester upto the current date.
 It is done by using web scraping to scrape data from the [SVKM Portal](https://portal.svkm.ac.in/usermgmt/login) website.
 No database is used, the credentials entered are directly used to get the data, not saved anywhere.
 
@@ -12,11 +12,13 @@ No database is used, the credentials entered are directly used to get the data, 
 -   Green zone: attendance >= 75% -- shows no. of lectures that can be missed still having attendance >= 75%
 -   Yellow zone: attendance >= 75% -- this means, it is not possible to miss even 1 lecture to maintain attendance >-= 75%
 
-### Screenshots of the app (mobile responsive):
+### Screenshots of the PWA:
 
 ![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/d3a66dce-9f83-425f-b827-416ec50fc4e9)
 
 ![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/b1145188-a8c7-4549-83bb-b7d8188e8c83)
+
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/8934a272-a471-4d06-ad7e-93834eae03b5)
 
 ![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/aa509771-d459-4a19-9838-ddab8f3e14f7)
 
