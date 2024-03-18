@@ -1,8 +1,12 @@
+import { SERVER_URL } from "./env.js";
+
 let deferredPrompt;
 let isInstallPromptShown = false;
+const pwaBanner = document.getElementById("install-banner");
 
 window.addEventListener("beforeinstallprompt", (event) => {
     event.preventDefault();
+    pwaBanner.style.display = "flex";
 
     // Save the event to use it later
     deferredPrompt = event;
@@ -13,7 +17,6 @@ window.addEventListener("beforeinstallprompt", (event) => {
 });
 
 function customInstallPrompt() {
-    const pwaBanner = document.getElementById("install-banner");
     const closeBannerBtn = document.getElementById("close-banner-btn");
     const installPwaBtn = document.getElementById("install-pwa-btn");
 
@@ -45,10 +48,9 @@ if ("serviceWorker" in navigator) {
     });
 }
 
-import { SERVER_URL } from "./env.js";
-
 const fetchBtn = document.getElementById("fetch-data-btn");
 const panelContainer = document.getElementById("panel-container");
+const lastCheckedContainer = document.getElementById("last-checked-container");
 const loader = document.getElementById("loader");
 
 fetchBtn.addEventListener("click", function (event) {
@@ -166,6 +168,109 @@ const needToAttendCount = (lecture) => {
     return count;
 };
 
+const displayData = (attendanceData, container) => {
+    const totalPercent = document.createElement("div");
+    totalPercent?.classList?.add("total-percent");
+
+    let totalSum = 0;
+    let presentSum = 0;
+    for (const lecture of attendanceData) {
+        totalSum += lecture?.total;
+        presentSum += lecture?.attended;
+    }
+    totalPercent.innerText = `Total percentage = ${(
+        (presentSum * 100) /
+        totalSum
+    ).toFixed(2)}%
+            Total lectures = ${totalSum}
+            Present = ${presentSum}
+            Absent = ${totalSum - presentSum}`;
+    container.appendChild(totalPercent);
+
+    attendanceData.forEach((lecture) => {
+        const panel = document.createElement("div");
+        panel?.classList?.add("panel");
+
+        const panelHeader = document.createElement("div");
+        panelHeader?.classList?.add("panel-header");
+        panelHeader.innerHTML = `
+                    <span>${lecture?.course} = ${lecture?.percent}%</span>
+                    <span class="dropdown-arrow"></span>`;
+        panelHeader.addEventListener("click", () => {
+            panelContent?.classList?.toggle("active");
+            panelHeader
+                .querySelector(".dropdown-arrow")
+                ?.classList?.toggle("active");
+        });
+
+        const panelContent = document.createElement("div");
+        panelContent?.classList?.add("panel-content");
+
+        let htmlString = `
+                        <p>Percentage: ${lecture.percent}</p>
+                        <p>Total Lectures: ${lecture.total}</p>
+                        <p>Present: ${lecture.attended}</p>
+                        <p>Absent: ${lecture.total - lecture.attended}</p>`;
+        const count = lecture?.count;
+        if (lecture.percent >= 75) {
+            if (count == 0) {
+                panelHeader?.classList?.add("yellow");
+                htmlString += `
+                            <p>To stay >= 75% attendance</p>
+                            <p>CAN MISS: ${count} ${
+                    lecture?.course?.includes("LAB") ? "labs" : "lectures"
+                }</p>`;
+            } else {
+                panelHeader?.classList?.add("green");
+                htmlString += `
+                            <p>To stay >= 75% attendance</p>
+                            <p>CAN MISS: ${count} ${
+                    lecture?.course?.includes("LAB")
+                        ? count == 1
+                            ? "lab"
+                            : "labs"
+                        : count == 1
+                        ? "lecture"
+                        : "lectures"
+                } safely</p>`;
+            }
+        } else {
+            panelHeader?.classList?.add("red");
+            htmlString += `
+                            <p>To have >= 75% attendance</p>
+                            <p>NEED TO ATTEND: ${count} ${
+                lecture?.course?.includes("LAB")
+                    ? count == 1
+                        ? "lab"
+                        : "labs"
+                    : count == 1
+                    ? "lecture"
+                    : "lectures"
+            } atleast</p>`;
+        }
+
+        panelContent.innerHTML = htmlString;
+
+        panel.appendChild(panelHeader);
+        panel.appendChild(panelContent);
+        container.appendChild(panel);
+    });
+};
+
+const lastRecordData = JSON.parse(localStorage.getItem("lastRecordData"));
+const lastCheckedDate = localStorage.getItem("lastCheckedDate");
+if (lastRecordData) {
+    const dateContainer = document.createElement("div");
+    dateContainer?.classList?.add("date-container");
+    dateContainer.innerText = `Last Checked: ${lastCheckedDate}`;
+    lastCheckedContainer.appendChild(dateContainer);
+
+    displayData(lastRecordData, lastCheckedContainer);
+} else {
+    console.log("Item not found in localStorage");
+    lastCheckedContainer.style.display = "none";
+}
+
 function fetchData(username, password) {
     fetch(`${SERVER_URL}/scrape`, {
         method: "POST",
@@ -225,96 +330,31 @@ function fetchData(username, password) {
             ];
 
             attendanceData = sortedDataArr;
-            console.log(attendanceData);
+            // console.log(attendanceData);
 
-            const totalPercent = document.createElement("div");
-            totalPercent?.classList?.add("total-percent");
+            const currentDate = new Date();
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth() + 1;
+            const day = currentDate.getDate();
+            const checkedDate =
+                (day < 10 ? "0" + day : day) +
+                "/" +
+                (month < 10 ? "0" + month : month) +
+                "/" +
+                year;
+            localStorage.setItem("lastCheckedDate", checkedDate);
 
-            let totalSum = 0;
-            let presentSum = 0;
-            for (const lecture of attendanceData) {
-                totalSum += lecture?.total;
-                presentSum += lecture?.attended;
-            }
-            totalPercent.innerText = `Total percentage = ${(
-                (presentSum * 100) /
-                totalSum
-            ).toFixed(2)}%
-            Total lectures = ${totalSum}
-            Present = ${presentSum}
-            Absent = ${totalSum - presentSum}`;
-            panelContainer.appendChild(totalPercent);
+            localStorage.setItem(
+                "lastRecordData",
+                JSON.stringify(attendanceData)
+            );
 
-            attendanceData.forEach((lecture) => {
-                const panel = document.createElement("div");
-                panel?.classList?.add("panel");
+            const dateContainer = document.createElement("div");
+            dateContainer?.classList?.add("date-container");
+            dateContainer.innerText = `Date checked: ${checkedDate}`;
+            panelContainer.appendChild(dateContainer);
 
-                const panelHeader = document.createElement("div");
-                panelHeader?.classList?.add("panel-header");
-                panelHeader.innerHTML = `
-                    <span>${lecture?.course} = ${lecture?.percent}%</span>
-                    <span class="dropdown-arrow"></span>`;
-                panelHeader.addEventListener("click", () => {
-                    panelContent?.classList?.toggle("active");
-                    panelHeader
-                        .querySelector(".dropdown-arrow")
-                        ?.classList?.toggle("active");
-                });
-
-                const panelContent = document.createElement("div");
-                panelContent?.classList?.add("panel-content");
-
-                let htmlString = `
-                        <p>Percentage: ${lecture.percent}</p>
-                        <p>Total Lectures: ${lecture.total}</p>
-                        <p>Present: ${lecture.attended}</p>
-                        <p>Absent: ${lecture.total - lecture.attended}</p>`;
-                const count = lecture?.count;
-                if (lecture.percent >= 75) {
-                    if (count == 0) {
-                        panelHeader?.classList?.add("yellow");
-                        htmlString += `
-                            <p>To stay >= 75% attendance</p>
-                            <p>CAN MISS: ${count} ${
-                            lecture?.course?.includes("LAB")
-                                ? "labs"
-                                : "lectures"
-                        }</p>`;
-                    } else {
-                        panelHeader?.classList?.add("green");
-                        htmlString += `
-                            <p>To stay >= 75% attendance</p>
-                            <p>CAN MISS: ${count} ${
-                            lecture?.course?.includes("LAB")
-                                ? count == 1
-                                    ? "lab"
-                                    : "labs"
-                                : count == 1
-                                ? "lecture"
-                                : "lectures"
-                        } safely</p>`;
-                    }
-                } else {
-                    panelHeader?.classList?.add("red");
-                    htmlString += `
-                            <p>To have >= 75% attendance</p>
-                            <p>NEED TO ATTEND: ${count} ${
-                        lecture?.course?.includes("LAB")
-                            ? count == 1
-                                ? "lab"
-                                : "labs"
-                            : count == 1
-                            ? "lecture"
-                            : "lectures"
-                    } atleast</p>`;
-                }
-
-                panelContent.innerHTML = htmlString;
-
-                panel.appendChild(panelHeader);
-                panel.appendChild(panelContent);
-                panelContainer.appendChild(panel);
-            });
+            displayData(attendanceData, panelContainer);
         })
         .catch((error) => {
             console.log(error);
@@ -337,7 +377,7 @@ function extractTableData(htmlContent) {
     // Extract the content inside the <pre> tag
     const preContent = doc.querySelector("pre")?.textContent;
     const tableHtml = parser.parseFromString(preContent, "text/html");
-    console.log(tableHtml);
+    // console.log(tableHtml);
 
     const data = {};
     const rows = tableHtml.querySelectorAll("table tbody tr");

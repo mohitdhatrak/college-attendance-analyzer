@@ -12,7 +12,7 @@ const assets = [
     "/assets/favicon-16x16.png",
     "/assets/favicon.ico",
     "/assets/down-arrow.png",
-    "/assets/close-white.svg",
+    "/assets/close-icon.svg",
 ];
 
 self.addEventListener("install", (installEvent) => {
