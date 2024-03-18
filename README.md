@@ -14,19 +14,23 @@ No database is used, the credentials entered are directly used to get the data, 
 
 ### Screenshots of the PWA:
 
-![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/d3a66dce-9f83-425f-b827-416ec50fc4e9)
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/4b6a8ee6-1251-4b6c-8645-f55ea04c7cb8)
 
-![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/b1145188-a8c7-4549-83bb-b7d8188e8c83)
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/7e8b9b31-4c37-4f9c-83a0-7df214fefd55)
 
-![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/8934a272-a471-4d06-ad7e-93834eae03b5)
-
-![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/aa509771-d459-4a19-9838-ddab8f3e14f7)
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/3ac9a23d-1b68-41aa-8986-1bec9240e858)
 
 ![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/bd9a9a59-aaa5-4dd1-8d95-1a0a903bc8b4)
 
 ![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/ee1d4be1-e52c-4564-afd0-0bf53e4376b5)
 
 ![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/4abe318d-081b-4d44-8481-7b8bc46d4976)
+
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/fe0c42f7-3806-4e15-bd80-21f3771e1d7c)
+
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/d87fb68e-677f-47ac-8d75-703850da6f55)
+
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/7332714c-d64f-4a40-9e3f-055a14f19040)
 
 ### Future Scope:
 
