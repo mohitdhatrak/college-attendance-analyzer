@@ -179,10 +179,11 @@ button {
     padding: 10px;
     color: #888;
     font-size: 14px;
+    margin-bottom: 20px;
 }
 
 .footer p {
-    margin: 5px auto;
+    margin: 0 auto;
 }
 
 /* install prompt */
