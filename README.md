@@ -20,7 +20,7 @@ It is done by using web scraping to scrape data from the [SVKM Portal](https://p
 
 ### Screenshots of the PWA:
 
-![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/4b6a8ee6-1251-4b6c-8645-f55ea04c7cb8)
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/cd63c5b7-2eee-4ad0-80a6-43a63b411869)
 
 ![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/f570e223-16eb-45dc-951c-34e6f8e96f2c)
 
