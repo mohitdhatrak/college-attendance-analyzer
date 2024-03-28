@@ -1,5 +1,14 @@
 import { SERVER_URL } from "./env.js";
 
+// to clear user's localstorage whenever new changes are pushed
+const APP_VERSION = "1.0.0";
+const currentVersion = localStorage.getItem("appVersion");
+if (currentVersion !== APP_VERSION) {
+    localStorage.clear();
+
+    localStorage.setItem("appVersion", APP_VERSION);
+}
+
 let deferredPrompt;
 let isInstallPromptShown = false;
 const pwaBanner = document.getElementById("install-banner");
