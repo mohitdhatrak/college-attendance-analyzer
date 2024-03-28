@@ -9,7 +9,7 @@ It is done by using web scraping to scrape data from the [SVKM Portal](https://p
 
 -   Red zone: attendance < 75% -- shows no. of lectures to attend to have attendance >= 75%
 -   Green zone: attendance >= 75% -- shows no. of lectures that can be missed still having attendance >= 75%
--   Yellow zone: attendance >= 75% -- this means, it is not possible to miss even 1 lecture to maintain attendance >-= 75%
+-   Yellow zone: attendance >= 75% -- this means, it is not possible to miss even 1 lecture to maintain attendance >= 75%
 
 ### A few points to note:
 
