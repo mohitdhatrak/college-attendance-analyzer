@@ -168,16 +168,10 @@ const needToAttendCount = (lecture) => {
     return count;
 };
 
-const displayData = (attendanceData, container) => {
+const displayData = (attendanceData, container, totalSum, presentSum) => {
     const totalPercent = document.createElement("div");
     totalPercent?.classList?.add("total-percent");
 
-    let totalSum = 0;
-    let presentSum = 0;
-    for (const lecture of attendanceData) {
-        totalSum += lecture?.total;
-        presentSum += lecture?.attended;
-    }
     totalPercent.innerText = `Total percentage = ${(
         (presentSum * 100) /
         totalSum
@@ -265,9 +259,11 @@ if (lastRecordData) {
     dateContainer.innerText = `Last Checked: ${lastCheckedDate}`;
     lastCheckedContainer.appendChild(dateContainer);
 
-    displayData(lastRecordData, lastCheckedContainer);
+    const totalSum = JSON.parse(localStorage.getItem("totalSum"));
+    const presentSum = JSON.parse(localStorage.getItem("presentSum"));
+
+    displayData(lastRecordData, lastCheckedContainer, totalSum, presentSum);
 } else {
-    console.log("Item not found in localStorage");
     lastCheckedContainer.style.display = "none";
 }
 
@@ -289,6 +285,10 @@ function fetchData(username, password) {
         .then((data) => {
             loader.style.display = "none";
             fetchBtn.disabled = false;
+
+            // gtag("event", "successful_check", {
+            //     sap_id: username,
+            // });
 
             let attendanceData = extractTableData(data);
             attendanceData = Object.values(attendanceData);
@@ -332,6 +332,22 @@ function fetchData(username, password) {
             attendanceData = sortedDataArr;
             // console.log(attendanceData);
 
+            let totalSum = 0;
+            let presentSum = 0;
+            for (const lecture of attendanceData) {
+                totalSum += lecture?.total;
+                presentSum += lecture?.attended;
+            }
+
+            // new error case handling
+            const percentage = (presentSum * 100) / totalSum;
+            if (totalSum == 0 || isNaN(percentage)) {
+                throw Error("Data not found");
+            }
+
+            localStorage.setItem("totalSum", JSON.stringify(totalSum));
+            localStorage.setItem("presentSum", JSON.stringify(presentSum));
+
             const currentDate = new Date();
             const year = currentDate.getFullYear();
             const month = currentDate.getMonth() + 1;
@@ -354,7 +370,7 @@ function fetchData(username, password) {
             dateContainer.innerText = `Date checked: ${checkedDate}`;
             panelContainer.appendChild(dateContainer);
 
-            displayData(attendanceData, panelContainer);
+            displayData(attendanceData, panelContainer, totalSum, presentSum);
         })
         .catch((error) => {
             console.log(error);
@@ -362,9 +378,18 @@ function fetchData(username, password) {
             loader.style.display = "none";
             fetchBtn.disabled = false;
 
+            // gtag("event", "failed_check", {
+            //     sap_id: username,
+            // });
+
             const errorContainer = document.createElement("div");
-            errorContainer.innerText =
-                "Please check credentials, or try again later!";
+            if (error?.message?.includes("Data not found")) {
+                errorContainer.innerText =
+                    "Data not found, please try again later!";
+            } else {
+                errorContainer.innerText =
+                    "Please check credentials, or try again later!";
+            }
             errorContainer?.classList?.add("error-text");
             panelContainer.appendChild(errorContainer);
         });
