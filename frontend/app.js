@@ -4,7 +4,7 @@ import { displayLastCheckedData } from "./task-functions/last-checked-data.js";
 import { showPwaBanner } from "./task-functions/pwa-custom-banner.js";
 
 // to clear user's localstorage whenever new changes are pushed
-const APP_VERSION = "1.0.2";
+const APP_VERSION = "1.0.3";
 const currentVersion = localStorage.getItem("appVersion");
 if (currentVersion !== APP_VERSION) {
     localStorage.clear();
@@ -35,7 +35,7 @@ if ("serviceWorker" in navigator) {
 displayAcademicCalendar();
 
 // show last checked attendance data, as waiting time is long
-displayLastCheckedData();
+const lastCheckedDate = displayLastCheckedData();
 
 // get attendance data as per button click!
-getAttendanceData();
+getAttendanceData(lastCheckedDate);

@@ -11,10 +11,12 @@ const panelContainer = document.getElementById("panel-container");
 const errorContainer = document.getElementById("error-container");
 const loader = document.getElementById("loader");
 
+let lastCheckedDate;
+
 // get semester data
 const { semesterYear, semesterMonths } = semesterStart();
 
-export const getAttendanceData = () => {
+export const getAttendanceData = (date) => {
     fetchDataBtn.addEventListener("click", function (event) {
         event.preventDefault();
         const username = document.getElementById("username").value;
@@ -38,6 +40,7 @@ export const getAttendanceData = () => {
             fetchData(username, password);
             loader.style.display = "block";
             fetchDataBtn.disabled = true;
+            lastCheckedDate = date;
         }
     });
 };
@@ -125,7 +128,7 @@ const fetchData = (username, password) => {
 
 const addContainerHeaders = (dateTime) => {
     // compare current data with previous data - title
-    const lastCheckedDate = localStorage.getItem("lastCheckedDate");
+    console.log(lastCheckedDate);
     if (lastCheckedDate) {
         const compare = document.getElementById("compare");
         compare.innerText = "Compare with your last checked data: ";

@@ -24,4 +24,6 @@ export const displayLastCheckedData = () => {
     } else {
         lastCheckedContainer.style.display = "none";
     }
+
+    return lastCheckedDate;
 };
