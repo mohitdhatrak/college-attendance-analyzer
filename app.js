@@ -296,6 +296,9 @@ const displayData = (attendanceData, container, totalSum, presentSum) => {
 const lastRecordData = JSON.parse(localStorage.getItem("lastRecordData"));
 const lastCheckedDate = localStorage.getItem("lastCheckedDate");
 if (lastRecordData) {
+    const compare = document.getElementById("compare");
+    compare.style.display = "block";
+
     const dateContainer = document.createElement("div");
     dateContainer?.classList?.add("date-container");
     dateContainer.innerText = `${lastCheckedDate}`;
@@ -307,8 +310,6 @@ if (lastRecordData) {
     displayData(lastRecordData, lastCheckedContainer, totalSum, presentSum);
 } else {
     lastCheckedContainer.style.display = "none";
-    const compare = document.getElementById("compare");
-    compare.style.display = "none";
 }
 
 function fetchData(username, password) {
@@ -431,10 +432,12 @@ function fetchData(username, password) {
                 const compare = document.getElementById("compare");
                 compare.innerText = "Compare with your last checked data: ";
                 compare?.classList?.add("compare-title");
+                compare.style.display = "block";
             }
 
             const currentData = document.createElement("div");
             currentData?.classList?.add("current-data");
+            currentData.style.display = "block";
             currentData.innerText = "Current data: ";
             panelContainer.appendChild(currentData);
 
