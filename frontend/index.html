@@ -11,7 +11,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png">
-    <link rel="manifest" href="./site.webmanifest">
+    <link rel="manifest" href="./assets/site.webmanifest">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.1/openseadragon.min.js"
         integrity="sha512-LbaoUnRCul2C+I4cdS/EMnMbynmZMU58AApBnZkhMzp/r8rOS7htjTsox7g6rf5ZXkSx56F5dDYmhLwqV1Zt4A=="
@@ -31,16 +31,21 @@
 
     <div class="container">
         <h1>Attendance Analyzer</h1>
+
         <form id="login-form">
-            <input type="text" id="username" placeholder="SAP ID" required>
-            <input type="password" id="password" placeholder="Password" title="SVKM portal password" required>
+            <input type="text" id="username" name="username" autocomplete="username" placeholder="SAP ID" title="SAP ID"
+                required>
+            <input type="password" id="password" name="current-password" autocomplete="current-password"
+                placeholder="Password" title="SVKM portal password" required>
             <span class="password-help">(SVKM portal or NMIMS app password)</span>
             <p class="note">Note: Credentials aren't saved. Average response time is 30 secs :( This data is from the
                 SVKM portal, might not be accurate!</p>
             <button id="fetch-data-btn">Check now</button>
         </form>
+
         <div id="loader" class="loader"></div>
         <div id="error-container"></div>
+
         <div class="panel" id="academic-calendar">
             <div class="panel-header"><span>Check semester academic calendar and plan your leaves accordingly
                 </span>
@@ -48,10 +53,13 @@
             </div>
             <div class="panel-content" id="image-viewer"></div>
         </div>
+
         <div id="panel-container"></div>
+
         <div class="last-checked" id="compare">Last checked data: </div>
         <div id="last-checked-container"></div>
     </div>
+
     <footer class="footer">
         <p>&copy; <a target="_blank" href="https://mohitdhatrak.bio.link">Mohit Dhatrak</a>.
         </p>

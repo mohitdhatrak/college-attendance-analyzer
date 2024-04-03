@@ -72,11 +72,6 @@ button {
     max-width: 90vw;
 }
 
-/* Accordion styles */
-.panel-container {
-    margin-top: 20px;
-}
-
 .error-text {
     text-align: center;
     padding: 10px;
@@ -87,6 +82,10 @@ button {
     margin: 0 auto;
     max-width: 90vw;
     margin-bottom: 20px;
+}
+
+.panel-container {
+    margin-top: 20px;
 }
 
 .panel {
@@ -115,6 +114,10 @@ button {
     padding: 0;
 }
 
+.active {
+    display: block;
+}
+
 .total-percent {
     background-color: #bae6fd;
     padding: 10px;
@@ -122,11 +125,6 @@ button {
     text-transform: uppercase;
     border-radius: 5px;
     margin-bottom: 18px;
-    /* text-align: center; */
-}
-
-.active {
-    display: block;
 }
 
 .green {
@@ -196,7 +194,6 @@ button {
     margin: 0 auto;
 }
 
-/* install prompt */
 .install-banner {
     background-color: #e5e7eb;
     border-bottom: 1px solid #000;

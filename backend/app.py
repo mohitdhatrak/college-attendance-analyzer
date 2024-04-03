@@ -3,7 +3,6 @@ import os
 from dotenv import load_dotenv
 from flask import Flask, render_template_string, request
 from flask_cors import CORS
-
 from web_scrape import scrape_attendance_summary
 
 load_dotenv()
