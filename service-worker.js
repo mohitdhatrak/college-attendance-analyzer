@@ -12,6 +12,7 @@ const assets = [
     "/assets/favicon-16x16.png",
     "/assets/favicon.ico",
     "/assets/down-arrow.png",
+    "/assets/up-arrow.png",
     "/assets/close-icon.svg",
 ];
 

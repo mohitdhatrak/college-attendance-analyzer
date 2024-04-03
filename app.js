@@ -1,7 +1,7 @@
 import { SERVER_URL } from "./env.js";
 
 // to clear user's localstorage whenever new changes are pushed
-const APP_VERSION = "1.0.0";
+const APP_VERSION = "1.0.1";
 const currentVersion = localStorage.getItem("appVersion");
 if (currentVersion !== APP_VERSION) {
     localStorage.clear();
@@ -59,8 +59,38 @@ if ("serviceWorker" in navigator) {
 
 const fetchBtn = document.getElementById("fetch-data-btn");
 const panelContainer = document.getElementById("panel-container");
+const errorContainer = document.getElementById("error-container");
 const lastCheckedContainer = document.getElementById("last-checked-container");
 const loader = document.getElementById("loader");
+const academicCalendar = document.getElementById("academic-calendar");
+
+academicCalendar
+    .querySelector(".panel-header")
+    .addEventListener("click", () => {
+        academicCalendar
+            .querySelector(".panel-header")
+            .querySelector(".dropdown-arrow")
+            ?.classList?.toggle("active");
+        academicCalendar
+            .querySelector(".panel-content")
+            ?.classList?.toggle("active");
+    });
+
+OpenSeadragon({
+    id: "image-viewer",
+    prefixUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.1/images/",
+    tileSources: {
+        type: "image",
+        url: "https://res.cloudinary.com/mohitdhatrak/image/upload/v1712150076/academic-calendar_llxbyl.png",
+    },
+    gestureSettingsMouse: {
+        scrollToZoom: true,
+    },
+    gestureSettingsTouch: {
+        scrollToZoom: true,
+    },
+});
 
 fetchBtn.addEventListener("click", function (event) {
     event.preventDefault();
@@ -71,12 +101,15 @@ fetchBtn.addEventListener("click", function (event) {
     while (panelContainer.firstChild) {
         panelContainer.removeChild(panelContainer.firstChild);
     }
+    while (errorContainer.firstChild) {
+        errorContainer.removeChild(errorContainer.firstChild);
+    }
 
     if (username?.trim() == "" || password?.trim() == "") {
-        const errorContainer = document.createElement("div");
-        errorContainer.innerText = "Please fill required fields!";
-        errorContainer?.classList?.add("error-text");
-        panelContainer.appendChild(errorContainer);
+        const error = document.createElement("div");
+        error.innerText = "Please fill required fields!";
+        error?.classList?.add("error-text");
+        errorContainer.appendChild(error);
     } else {
         fetchData(username, password);
         loader.style.display = "block";
@@ -265,7 +298,7 @@ const lastCheckedDate = localStorage.getItem("lastCheckedDate");
 if (lastRecordData) {
     const dateContainer = document.createElement("div");
     dateContainer?.classList?.add("date-container");
-    dateContainer.innerText = `Last Checked: ${lastCheckedDate}`;
+    dateContainer.innerText = `${lastCheckedDate}`;
     lastCheckedContainer.appendChild(dateContainer);
 
     const totalSum = JSON.parse(localStorage.getItem("totalSum"));
@@ -274,6 +307,8 @@ if (lastRecordData) {
     displayData(lastRecordData, lastCheckedContainer, totalSum, presentSum);
 } else {
     lastCheckedContainer.style.display = "none";
+    const compare = document.getElementById("compare");
+    compare.style.display = "none";
 }
 
 function fetchData(username, password) {
@@ -358,7 +393,7 @@ function fetchData(username, password) {
             localStorage.setItem("presentSum", JSON.stringify(presentSum));
 
             const currentDate = new Date();
-            const year = currentDate.getFullYear();
+            const year = currentDate.getFullYear() % 100;
             const month = currentDate.getMonth() + 1;
             const day = currentDate.getDate();
             const checkedDate =
@@ -367,16 +402,45 @@ function fetchData(username, password) {
                 (month < 10 ? "0" + month : month) +
                 "/" +
                 year;
-            localStorage.setItem("lastCheckedDate", checkedDate);
+
+            let hour = currentDate.getHours();
+            const minute = currentDate.getMinutes();
+            let ampm = "am";
+            if (hour >= 12) {
+                hour -= 12;
+                ampm = "pm";
+            }
+            if (hour === 0) {
+                hour = 12;
+            }
+            const checkedTime =
+                (hour < 10 ? "0" + hour : hour) +
+                ":" +
+                (minute < 10 ? "0" + minute : minute);
+
+            const dateTime = `Date: ${checkedDate}, Time: ${checkedTime} ${ampm}`;
+
+            localStorage.setItem("lastCheckedDate", dateTime);
 
             localStorage.setItem(
                 "lastRecordData",
                 JSON.stringify(attendanceData)
             );
 
+            if (lastCheckedDate) {
+                const compare = document.getElementById("compare");
+                compare.innerText = "Compare with your last checked data: ";
+                compare?.classList?.add("compare-title");
+            }
+
+            const currentData = document.createElement("div");
+            currentData?.classList?.add("current-data");
+            currentData.innerText = "Current data: ";
+            panelContainer.appendChild(currentData);
+
             const dateContainer = document.createElement("div");
             dateContainer?.classList?.add("date-container");
-            dateContainer.innerText = `Date checked: ${checkedDate}`;
+            dateContainer.innerText = `${dateTime}`;
             panelContainer.appendChild(dateContainer);
 
             displayData(attendanceData, panelContainer, totalSum, presentSum);
@@ -391,16 +455,15 @@ function fetchData(username, password) {
             //     sap_id: username,
             // });
 
-            const errorContainer = document.createElement("div");
+            const errorDiv = document.createElement("div");
             if (error?.message?.includes("Data not found")) {
-                errorContainer.innerText =
-                    "Data not found, please try again later!";
+                errorDiv.innerText = "Data not found, please try again later!";
             } else {
-                errorContainer.innerText =
+                errorDiv.innerText =
                     "Please check credentials, or try again later!";
             }
-            errorContainer?.classList?.add("error-text");
-            panelContainer.appendChild(errorContainer);
+            errorDiv?.classList?.add("error-text");
+            errorContainer.appendChild(errorDiv);
         });
 }
 

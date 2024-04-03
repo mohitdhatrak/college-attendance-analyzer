@@ -13,6 +13,9 @@
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png">
     <link rel="manifest" href="./site.webmanifest">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.1/openseadragon.min.js"
+        integrity="sha512-LbaoUnRCul2C+I4cdS/EMnMbynmZMU58AApBnZkhMzp/r8rOS7htjTsox7g6rf5ZXkSx56F5dDYmhLwqV1Zt4A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body>
@@ -21,7 +24,7 @@
             <button id="close-banner-btn" class="close-banner-btn">
                 <img class="close-icon" alt="Close" src="assets/close-icon.svg" />
             </button>
-            <p class="banner-text">Attendance App</p>
+            <p class="banner-text">Attendance App (PWA)</p>
         </div>
         <button id="install-pwa-btn" class="install-button">Install</button>
     </div>
@@ -36,8 +39,17 @@
                 SVKM portal, might not be accurate!</p>
             <button id="fetch-data-btn">Check now</button>
         </form>
-        <div id="panel-container"></div>
         <div id="loader" class="loader"></div>
+        <div id="error-container"></div>
+        <div class="panel" id="academic-calendar">
+            <div class="panel-header"><span>Check semester academic calendar and plan your leaves accordingly
+                </span>
+                <span class="dropdown-arrow"></span>
+            </div>
+            <div class="panel-content" id="image-viewer"></div>
+        </div>
+        <div id="panel-container"></div>
+        <div class="last-checked" id="compare">Last checked data: </div>
         <div id="last-checked-container"></div>
     </div>
     <footer class="footer">
