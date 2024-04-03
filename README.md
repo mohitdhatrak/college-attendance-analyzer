@@ -22,9 +22,13 @@ It is done by using web scraping to scrape data from the [SVKM Portal](https://p
 
 ![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/cd63c5b7-2eee-4ad0-80a6-43a63b411869)
 
-![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/f570e223-16eb-45dc-951c-34e6f8e96f2c)
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/808e42c1-e7b4-4aac-b79e-9dc9fb6356e7)
 
-![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/7e8b9b31-4c37-4f9c-83a0-7df214fefd55)
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/1a2509d2-0340-4e17-b0c2-349fe3eecc25)
+
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/5333a207-1ec6-4615-a49c-401816fce09c)
+
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/11b106d6-646b-4a6d-b006-46561d6ef5d9)
 
 ![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/bd9a9a59-aaa5-4dd1-8d95-1a0a903bc8b4)
 
@@ -32,9 +36,9 @@ It is done by using web scraping to scrape data from the [SVKM Portal](https://p
 
 ![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/4abe318d-081b-4d44-8481-7b8bc46d4976)
 
-![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/d87fb68e-677f-47ac-8d75-703850da6f55)
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/1bf70d91-03fa-427f-8196-78e991a08673)
 
-![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/20d7f7cd-113e-40a4-8089-2661c47f7d15)
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/4cd83ee4-a112-4161-a4f0-6ac6bfd57fe9)
 
 ### Future Scope:
 
