@@ -37,10 +37,10 @@ export const getAttendanceData = (date) => {
             error?.classList?.add("error-text");
             errorContainer.appendChild(error);
         } else {
+            lastCheckedDate = date;
             fetchData(username, password);
             loader.style.display = "block";
             fetchDataBtn.disabled = true;
-            lastCheckedDate = date;
         }
     });
 };
