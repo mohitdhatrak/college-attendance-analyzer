@@ -128,7 +128,7 @@ const fetchData = (username, password) => {
 
 const addContainerHeaders = (dateTime) => {
     // compare current data with previous data - title
-    console.log(lastCheckedDate);
+
     if (lastCheckedDate) {
         const compare = document.getElementById("compare");
         compare.innerText = "Compare with your last checked data: ";

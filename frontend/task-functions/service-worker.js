@@ -1,4 +1,6 @@
-const staticAttendanceAnalyzer = "attendance-analyzer-v1";
+import { APP_VERSION } from "./app-version";
+
+const staticAttendanceAnalyzer = "attendance-analyzer-v" + APP_VERSION;
 const assets = [
     "/",
     "/index.html",
@@ -16,6 +18,7 @@ const assets = [
     "/assets/close-icon.svg",
 ];
 
+// TODO: use versionUpdateType() to update cache as per change
 self.addEventListener("install", (installEvent) => {
     installEvent.waitUntil(
         caches.open(staticAttendanceAnalyzer).then((cache) => {

@@ -1,21 +1,22 @@
 import { displayAcademicCalendar } from "./task-functions/academic-calendar.js";
+import { APP_VERSION } from "./task-functions/app-version.js";
 import { getAttendanceData } from "./task-functions/get-attendance-data.js";
 import { displayLastCheckedData } from "./task-functions/last-checked-data.js";
 import { showPwaBanner } from "./task-functions/pwa-custom-banner.js";
 
+// TODO: use versionUpdateType() to update localstorage as per change
 // to clear user's localstorage whenever new changes are pushed
-const APP_VERSION = "1.0.3";
-const currentVersion = localStorage.getItem("appVersion");
-if (currentVersion !== APP_VERSION) {
+const previousVersion = localStorage.getItem("appVersion");
+if (previousVersion !== APP_VERSION) {
     localStorage.clear();
-
     localStorage.setItem("appVersion", APP_VERSION);
 }
 
 // custom PWA banner
 showPwaBanner();
 
-// check later if caching is working?
+// TODO: check if caching is working as expected or change logic
+// registering service worker
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", function () {
         navigator.serviceWorker
@@ -37,5 +38,6 @@ displayAcademicCalendar();
 // show last checked attendance data, as waiting time is long
 const lastCheckedDate = displayLastCheckedData();
 
+// TODO: add basic analytics
 // get attendance data as per button click!
 getAttendanceData(lastCheckedDate);
