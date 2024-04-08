@@ -22,13 +22,13 @@ It is done by using web scraping to scrape data from the [SVKM Portal](https://p
 
 ![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/cd63c5b7-2eee-4ad0-80a6-43a63b411869)
 
-![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/808e42c1-e7b4-4aac-b79e-9dc9fb6356e7)
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/6e9d0e83-3ac8-4ee4-a6f8-566dc12dce4a)
 
-![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/1a2509d2-0340-4e17-b0c2-349fe3eecc25)
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/13fea7f2-4020-461f-bdec-ad414d48b4c2)
 
-![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/1147e91f-aade-413b-bb4b-9344aebfce68)
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/9fcc107b-d862-4b22-a62c-251652e7aba8)
 
-![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/11b106d6-646b-4a6d-b006-46561d6ef5d9)
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/9ce45a0e-cc0b-41d2-acc0-ed8f34662f03)
 
 ![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/bd9a9a59-aaa5-4dd1-8d95-1a0a903bc8b4)
 
@@ -36,9 +36,9 @@ It is done by using web scraping to scrape data from the [SVKM Portal](https://p
 
 ![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/4abe318d-081b-4d44-8481-7b8bc46d4976)
 
-![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/1bf70d91-03fa-427f-8196-78e991a08673)
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/e30089ac-99f6-450f-b8ce-06f2ed7d977a)
 
-![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/31132769-4bf1-4026-b153-5a8d4e8da7d2)
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/ddf04422-ac07-464c-bf20-348994612bf5)
 
 ### Future Scope:
 
