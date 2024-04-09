@@ -1,4 +1,4 @@
-# College Attendance Analyzer PWA for TY Sem 6
+# College Attendance Analyzer PWA for DJSCE
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/08415c9a-2457-4240-8008-ab7eac2952bc/deploy-status)](https://app.netlify.com/sites/attendance-analyzer/deploys)
 
