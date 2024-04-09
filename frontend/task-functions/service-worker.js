@@ -1,4 +1,4 @@
-import { APP_VERSION } from "./app-version";
+import { APP_VERSION } from "./app-version.js";
 
 const staticAttendanceAnalyzer = "attendance-analyzer-v" + APP_VERSION;
 const assets = [
@@ -34,3 +34,15 @@ self.addEventListener("fetch", (fetchEvent) => {
         })
     );
 });
+
+export const unregisterServiceWorker = () => {
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+            .getRegistrations()
+            .then(function (registrations) {
+                for (let registration of registrations) {
+                    registration.unregister();
+                }
+            });
+    }
+};
