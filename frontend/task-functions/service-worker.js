@@ -35,6 +35,26 @@ self.addEventListener("fetch", (fetchEvent) => {
     );
 });
 
+// to clear user's old caches when a new version of the app is pushed
+self.addEventListener("activate", (activateEvent) => {
+    activateEvent.waitUntil(
+        caches.keys().then((cacheNames) => {
+            return Promise.all(
+                cacheNames
+                    .filter((cacheName) => {
+                        return (
+                            cacheName?.startsWith("attendance-analyzer-v") &&
+                            cacheName !== staticAttendanceAnalyzer
+                        );
+                    })
+                    .map((cacheName) => {
+                        return caches.delete(cacheName);
+                    })
+            );
+        })
+    );
+});
+
 export const unregisterServiceWorker = () => {
     if ("serviceWorker" in navigator) {
         navigator.serviceWorker

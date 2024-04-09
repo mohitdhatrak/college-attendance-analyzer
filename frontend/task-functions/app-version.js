@@ -1,4 +1,4 @@
-export const APP_VERSION = "1.0.4"; // version -> major.minor.patch
+export const APP_VERSION = "1.0.5"; // version -> major.minor.patch
 
 export const versionUpdateType = (previousVersion) => {
     const newVersion = APP_VERSION;
