@@ -64,9 +64,9 @@ const fetchData = (username, password) => {
             loader.style.display = "none";
             fetchDataBtn.disabled = false;
 
-            // gtag("event", "successful_check", {
-            //     sap_id: username,
-            // });
+            gtag("event", "successful_check", {
+                sap_id: username,
+            });
 
             // extracting useful json data from html
             const jsonData = extractTableData(data);
@@ -110,9 +110,9 @@ const fetchData = (username, password) => {
             loader.style.display = "none";
             fetchDataBtn.disabled = false;
 
-            // gtag("event", "failed_check", {
-            //     sap_id: username,
-            // });
+            gtag("event", "exception", {
+                description: error,
+            });
 
             const errorDiv = document.createElement("div");
             if (error?.message?.includes("Data not found")) {

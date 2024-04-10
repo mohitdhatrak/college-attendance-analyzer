@@ -32,6 +32,8 @@ export const showPwaBanner = () => {
                 console.log(`User ${choiceResult.outcome} the install prompt`);
                 if (choiceResult.outcome === "accepted") {
                     deferredPrompt = null;
+
+                    gtag("event", "installed_pwa");
                 }
             });
         });
