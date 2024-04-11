@@ -1,3 +1,5 @@
+import { hashString } from "./hash-string.js";
+
 export const showPwaBanner = () => {
     let deferredPrompt;
     let isInstallPromptShown = false;
@@ -33,7 +35,16 @@ export const showPwaBanner = () => {
                 if (choiceResult.outcome === "accepted") {
                     deferredPrompt = null;
 
-                    gtag("event", "installed_pwa");
+                    const username = document.getElementById("username").value;
+                    if (username) {
+                        // hashing sap id before sending to google analytics
+                        const hashedSapId = hashString(username);
+                        gtag("event", "installed_pwa", {
+                            sap_id: hashedSapId,
+                        });
+                    } else {
+                        gtag("event", "installed_pwa");
+                    }
                 }
             });
         });

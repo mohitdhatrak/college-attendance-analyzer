@@ -2,6 +2,7 @@ import { SERVER_URL } from "../env.js";
 import { displayData } from "./display-data.js";
 import { extractTableData } from "./extract-html-json-data.js";
 import { semesterStart } from "./get-semester-data.js";
+import { hashString } from "./hash-string.js";
 import { sortedColouredData } from "./sort-colour-data.js";
 import { getDateTime } from "./store-date-time.js";
 
@@ -64,8 +65,10 @@ const fetchData = (username, password) => {
             loader.style.display = "none";
             fetchDataBtn.disabled = false;
 
+            // hashing sap id before sending to google analytics
+            const hashedSapId = hashString(username);
             gtag("event", "successful_check", {
-                sap_id: username,
+                sap_id: hashedSapId,
             });
 
             // extracting useful json data from html
@@ -110,9 +113,14 @@ const fetchData = (username, password) => {
             loader.style.display = "none";
             fetchDataBtn.disabled = false;
 
+            // hashing sap id before sending to google analytics
+            const hashedSapId = hashString(username);
             gtag("event", "exception", {
                 description: error,
+                sap_id: hashedSapId,
             });
+
+            // TODO: add DB to send error logs to it
 
             const errorDiv = document.createElement("div");
             if (error?.message?.includes("Data not found")) {
