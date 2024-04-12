@@ -74,13 +74,24 @@ button {
 
 .error-text {
     text-align: center;
-    padding: 10px;
-    background-color: #fecaca;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 0 10px;
+    color: #ff000d;
+    /* color: #dc2626; */
+    font-weight: 500;
+    font-size: 1.1rem;
     width: max-content;
-    margin: 0 auto;
     max-width: 90vw;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.feedback-container {
+    text-align: center;
+    padding: 0 10px;
+    font-weight: 500;
+    width: max-content;
+    max-width: 90vw;
+    margin: 0 auto;
     margin-bottom: 20px;
 }
 
@@ -249,13 +260,9 @@ button {
 }
 
 .date-container {
-    font-size: 16px;
     font-weight: bold;
-    padding: 10px;
-    background-color: #e5e7eb;
-    border: 1px solid #ccc;
-    border-radius: 5px;
     margin: 20px auto;
+    margin-top: 10px;
 }
 
 #image-viewer {

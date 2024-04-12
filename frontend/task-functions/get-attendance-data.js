@@ -11,6 +11,7 @@ const fetchDataBtn = document.getElementById("fetch-data-btn");
 const panelContainer = document.getElementById("panel-container");
 const errorContainer = document.getElementById("error-container");
 const loader = document.getElementById("loader");
+const feedbackForm = document.getElementById("feedback-form");
 
 let lastCheckedDate;
 
@@ -20,10 +21,11 @@ const { semesterYear, semesterMonths } = semesterStart();
 export const getAttendanceData = (date) => {
     fetchDataBtn.addEventListener("click", function (event) {
         event.preventDefault();
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
+        const username = document.getElementById("username")?.value;
+        const password = document.getElementById("password")?.value;
 
         // reset displayed data
+        feedbackForm.style.display = "none";
         while (panelContainer.firstChild) {
             panelContainer.removeChild(panelContainer.firstChild);
         }
@@ -102,6 +104,27 @@ const fetchData = (username, password) => {
             // getting date and time of check
             const dateTime = getDateTime();
 
+            // add feedback form
+            feedbackForm.style.display = "block";
+            feedbackForm.innerHTML =
+                "Any suggestions? " +
+                "<a target='_blank' href='https://forms.gle/PCoypEjL3CsADjRZ6'>Share here</a>";
+            feedbackForm?.classList?.add("feedback-container");
+            feedbackForm
+                ?.querySelector("a")
+                ?.addEventListener("click", function () {
+                    const username = document.getElementById("username")?.value;
+                    if (username) {
+                        // hashing sap id before sending to google analytics
+                        const hashedSapId = hashString(username);
+                        gtag("event", "opened_suggestion_form", {
+                            sap_id: hashedSapId,
+                        });
+                    } else {
+                        gtag("event", "opened_suggestion_form");
+                    }
+                });
+
             // adding date containers and titles
             addContainerHeaders(dateTime);
 
@@ -120,14 +143,38 @@ const fetchData = (username, password) => {
                 sap_id: hashedSapId,
             });
 
+            // add feedback form
+            feedbackForm.style.display = "block";
+            feedbackForm.innerHTML =
+                "Still facing issues? " +
+                "<a target='_blank' href='https://forms.gle/PCoypEjL3CsADjRZ6'>Share here</a>";
+            feedbackForm?.classList?.add("feedback-container");
+            feedbackForm
+                ?.querySelector("a")
+                ?.addEventListener("click", function () {
+                    const username = document.getElementById("username")?.value;
+                    if (username) {
+                        // hashing sap id before sending to google analytics
+                        const hashedSapId = hashString(username);
+                        gtag("event", "opened_issue_form", {
+                            sap_id: hashedSapId,
+                        });
+                    } else {
+                        gtag("event", "opened_issue_form");
+                    }
+                });
+
             // TODO: add DB to send error logs to it
 
             const errorDiv = document.createElement("div");
             if (error?.message?.includes("Data not found")) {
-                errorDiv.innerText = "Data not found, please try again later!";
+                errorDiv.innerHTML =
+                    "Data not found," + "<br>" + "please try again later!";
             } else {
-                errorDiv.innerText =
-                    "Please check credentials, or try again later!";
+                errorDiv.innerHTML =
+                    "Please check credentials," +
+                    "<br>" +
+                    "or try again later!";
             }
             errorDiv?.classList?.add("error-text");
             errorContainer.appendChild(errorDiv);

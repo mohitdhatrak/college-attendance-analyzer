@@ -35,7 +35,7 @@ export const showPwaBanner = () => {
                 if (choiceResult.outcome === "accepted") {
                     deferredPrompt = null;
 
-                    const username = document.getElementById("username").value;
+                    const username = document.getElementById("username")?.value;
                     if (username) {
                         // hashing sap id before sending to google analytics
                         const hashedSapId = hashString(username);

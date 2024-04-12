@@ -1,6 +1,7 @@
 import { displayAcademicCalendar } from "./task-functions/academic-calendar.js";
 import { APP_VERSION } from "./task-functions/app-version.js";
 import { getAttendanceData } from "./task-functions/get-attendance-data.js";
+import { hashString } from "./task-functions/hash-string.js";
 import { displayLastCheckedData } from "./task-functions/last-checked-data.js";
 import { showPwaBanner } from "./task-functions/pwa-custom-banner.js";
 
@@ -41,3 +42,17 @@ const lastCheckedDate = displayLastCheckedData();
 // TODO: add basic analytics
 // get attendance data as per button click!
 getAttendanceData(lastCheckedDate);
+
+const socialsLink = document.getElementById("socials");
+socialsLink.addEventListener("click", function () {
+    const username = document.getElementById("username")?.value;
+    if (username) {
+        // hashing sap id before sending to google analytics
+        const hashedSapId = hashString(username);
+        gtag("event", "opened_socials", {
+            sap_id: hashedSapId,
+        });
+    } else {
+        gtag("event", "opened_socials");
+    }
+});
