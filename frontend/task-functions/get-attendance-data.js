@@ -113,16 +113,9 @@ const fetchData = (username, password) => {
             feedbackForm
                 ?.querySelector("a")
                 ?.addEventListener("click", function () {
-                    const username = document.getElementById("username")?.value;
-                    if (username) {
-                        // hashing sap id before sending to google analytics
-                        const hashedSapId = hashString(username);
-                        gtag("event", "opened_suggestion_form", {
-                            sap_id: hashedSapId,
-                        });
-                    } else {
-                        gtag("event", "opened_suggestion_form");
-                    }
+                    gtag("event", "opened_suggestion_form", {
+                        sap_id: hashedSapId,
+                    });
                 });
 
             // adding date containers and titles
@@ -152,16 +145,9 @@ const fetchData = (username, password) => {
             feedbackForm
                 ?.querySelector("a")
                 ?.addEventListener("click", function () {
-                    const username = document.getElementById("username")?.value;
-                    if (username) {
-                        // hashing sap id before sending to google analytics
-                        const hashedSapId = hashString(username);
-                        gtag("event", "opened_issue_form", {
-                            sap_id: hashedSapId,
-                        });
-                    } else {
-                        gtag("event", "opened_issue_form");
-                    }
+                    gtag("event", "opened_issue_form", {
+                        sap_id: hashedSapId,
+                    });
                 });
 
             // TODO: add DB to send error logs to it
