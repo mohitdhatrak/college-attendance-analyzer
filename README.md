@@ -14,6 +14,7 @@ It is done by using web scraping to scrape data from the [SVKM Portal](https://p
 ### A few points to note:
 
 - No database is used, the credentials entered are directly used to get the data, not saved anywhere.
+- Implemented hashing for SAPID, before sending data to Google Analytics ensuring users privacy.
 - The SVKM portal doesn't get updated immediately, so any given day's attendance most probably reflects after a few days.
 - Since the wait time to get current data is long, last viewed data is stored in local-storage, it can be analyzed till then.
 - There are some discrepancies in the data on the NMIMS app vs SVKM portal, verify your attendance to be sure!
