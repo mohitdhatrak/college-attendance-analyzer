@@ -1,3 +1,5 @@
+import { hashString } from "./hash-string.js";
+
 const ACADEMIC_CALENDAR_URL =
     "https://res.cloudinary.com/mohitdhatrak/image/upload/v1712150076/academic-calendar_llxbyl.png";
 
@@ -14,6 +16,17 @@ export const displayAcademicCalendar = () => {
             academicCalendar
                 .querySelector(".panel-content")
                 ?.classList?.toggle("active");
+
+            const username = document.getElementById("username")?.value;
+            if (username) {
+                // hashing sap id before sending to google analytics
+                const hashedSapId = hashString(username);
+                gtag("event", "checked_academic_calendar", {
+                    sap_id: hashedSapId,
+                });
+            } else {
+                gtag("event", "checked_academic_calendar");
+            }
         });
 
     OpenSeadragon({
