@@ -41,6 +41,24 @@ It is done by using web scraping to scrape data from the [SVKM Portal](https://p
 
 ![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/ddf04422-ac07-464c-bf20-348994612bf5)
 
+- Analytics
+
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/b25a42b6-5c6c-4536-b9ef-508f15fea23f)
+
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/bc6062fa-ebfc-453f-8163-3a64500897b1)
+
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/1ecf46e2-b26c-4e08-8170-83ae1fdd4ac9)
+
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/f5b19f93-d6e4-4226-a631-bd3b345d57a7)
+
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/040b7ae9-2d73-47ce-93d9-b95757efe537)
+
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/4545b5a9-d6d4-415c-8951-ce4aa33e47d7)
+
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/5096cabc-0492-4bf7-a86c-9d998a19ea63)
+
+![image](https://github.com/mohitdhatrak/college-attendance-analyzer/assets/91209576/a52d2a02-a0ee-46f4-b7b5-c69e594f5d60)
+
 ### Future Scope:
 
 -   Update logic to make the response time faster, currently too slow
