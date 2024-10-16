@@ -1,6 +1,6 @@
 import { SERVER_URL } from "../env.js";
 
-export const semesterStart = () => {
+export const semesterStart = async () => {
     const months = [
         "Jan",
         "Feb",
@@ -16,26 +16,28 @@ export const semesterStart = () => {
         "Dec",
     ];
 
-    let startMonthIndex = 0;
-    let semesterYear = 2024;
-
-    fetch(`${SERVER_URL}/semester`)
-        .then((response) => response.json())
-        .then((data) => {
-            startMonthIndex = Number(data?.month) - 1;
-            semesterYear = Number(data?.year);
-        })
-        .catch((error) => console.log(error));
-
     const currentDate = new Date();
-    const currentMonthIndex = currentDate.getMonth();
+    let startMonthIndex = currentDate.getMonth();
+    let semesterYear = currentDate.getFullYear();
 
-    // possible bug - currently this handles only same year data
-    // won't be an issue for now as our semesters start and end in same year
-    const semesterMonths = [];
-    for (let i = startMonthIndex; i <= currentMonthIndex; i++) {
-        semesterMonths.push(months[i]);
+    try {
+        const response = await fetch(`${SERVER_URL}/semester`);
+        const data = await response.json();
+
+        const currentMonthIndex = currentDate.getMonth();
+
+        startMonthIndex = Number(data?.month) - 1;
+        semesterYear = Number(data?.year);
+
+        // Handle months only within the same year for now
+        const semesterMonths = [];
+        for (let i = startMonthIndex; i <= currentMonthIndex; i++) {
+            semesterMonths.push(months[i]);
+        }
+
+        return { semesterYear, semesterMonths };
+    } catch (error) {
+        console.log(error);
+        return { semesterYear, semesterMonths: [months[startMonthIndex]] }; // Return an empty array on error
     }
-
-    return { semesterYear, semesterMonths };
 };

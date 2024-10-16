@@ -16,7 +16,11 @@ const feedbackForm = document.getElementById("feedback-form");
 let lastCheckedDate;
 
 // get semester data
-const { semesterYear, semesterMonths } = semesterStart();
+let semesterYear, semesterMonths;
+const getSemesterData = async () => {
+    ({ semesterYear, semesterMonths } = await semesterStart());
+};
+getSemesterData();
 
 export const getAttendanceData = (date) => {
     fetchDataBtn.addEventListener("click", function (event) {
