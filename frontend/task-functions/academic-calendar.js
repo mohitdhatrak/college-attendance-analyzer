@@ -1,7 +1,7 @@
 import { hashString } from "./hash-string.js";
 
 const ACADEMIC_CALENDAR_URL =
-    "https://res.cloudinary.com/mohitdhatrak/image/upload/v1722539667/academic_calendar_sem7.png";
+    "https://res.cloudinary.com/mohitdhatrak/image/upload/v1739262017/academic_calendar_sem8.png";
 
 export const displayAcademicCalendar = () => {
     const academicCalendar = document.getElementById("academic-calendar");
